@@ -1,9 +1,29 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Tab Two
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>
+            Photo Gallery
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+    <!-- eliminamos este tag (uso preliminar anterior a PhotoService)
+    <img [src]="currentImage" *ngIf="currentImage">
+    -->
+    <!-- Usamos grid component para organizar elementos en la página (2 fotos por row)-->
+    <ion-grid>
+        <ion-row>
+            <!-- Hacemos loop en el array, al ser ion-row de 12 establecemos size 6
+            para tener 2 photos por row -->
+            <ion-col size="6" *ngFor="let photo of photoService.photos">
+                <img [src]="photo.data" />
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+        <!-- LLamamos con el botón al metodo takePicture de PhotoService-->
+        <ion-fab-button (click)="photoService.takePicture()">
+            <ion-icon name="camera"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>
